@@ -57,13 +57,13 @@ validate $? "unzipping code"
 cd /app; npm install 
 validate $? "installing dependencies"
 
-cp catalogue.service /etc/systemd/system/catalogue.service
+cp /home/centos/roboshop-shell-script/catalogue.service /etc/systemd/system/catalogue.service
 validate $? "copying catalogue service file"
 
 systemctl daemon-reload; systemctl enable catalogue; systemctl start catalogue
 validate $? "starting catalogue service"
 
-cp mondb.repo /etc/yum.repos.d/mongo.repo
+cp /home/centos/roboshop-shell-script/mondb.repo /etc/yum.repos.d/mongo.repo
 validate $? "settingup mongdb repo"
 
 dnf install mongodb-org-shell -y
