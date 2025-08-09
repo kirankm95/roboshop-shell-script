@@ -31,10 +31,11 @@ fi
 dnf list installed mongodb-org &>> $LOGFILE
 if [ $? -eq 0 ]
 then
-    echo -e "$Y mentioned $package already installed $N"
+    echo -e "$Y mentioned mongodb-org already installed $N"
 else
-    dnf install $package -y &>> $LOGFILE
-    validate $? $package
+    echo "package not installed yet, so proceeding with installation"
+    dnf install mongodb-org -y &>> $LOGFILE
+    validate $? "installing mongodb-org"
 fi
 
 systemctl enable mongod &>> $LOGFILE
