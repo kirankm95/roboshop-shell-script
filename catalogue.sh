@@ -51,7 +51,7 @@ validate $? "creating app directory"
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip
 validate $? "downloading code"
 
-unzip /tmp/catalogue.zip /app/
+cd /app/; unzip /tmp/catalogue.zip
 validate $? "unzipping code"
 
 cd /app; npm install 
