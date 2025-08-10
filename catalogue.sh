@@ -48,8 +48,8 @@ fi
 mkdir -p /app &>> $LOGFILE
 validate $? "creating app directory"
 
-curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip
-validate $? "downloading code" &>> $LOGFILE
+curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
+validate $? "downloading code"
 
 cd /app/; unzip -o /tmp/catalogue.zip &>> $LOGFILE
 validate $? "unzipping code"
@@ -63,7 +63,7 @@ validate $? "copying catalogue service file"
 systemctl daemon-reload; systemctl enable catalogue; systemctl start catalogue &>> $LOGFILE
 validate $? "starting catalogue service"
 
-cp /home/centos/roboshop-shell-script/mondb.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+cp /home/centos/roboshop-shell-script/mondodb.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 validate $? "settingup mongdb repo"
 
 dnf install mongodb-org-shell -y &>> $LOGFILE
