@@ -26,7 +26,7 @@ if [ $ID -ne 0 ]
         echo -e "$G you are root user, hence proceeding $N"
 fi
         
-cp /home/centos/roboshop-shellscript/mongodb.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+cp /home/centos/roboshop-shell-script/mongodb.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 validate $? "enabling mongodb repo" 
 
 dnf list installed mongodb-org &>> $LOGFILE
