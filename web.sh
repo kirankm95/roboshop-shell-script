@@ -42,7 +42,7 @@ validate $? "removing default content of ngx"
 curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip &>> $LOGFILE
 validate $? "downloading code of ngx"
 
-unzip /tmp/web.zip /usr/share/nginx/html/ &>> $LOGFILE
+unzip -o /tmp/web.zip /usr/share/nginx/html/ &>> $LOGFILE
 validate $? "unzipping code of ngx"
 
 cp /home/centos/roboshop-shell-script/roboshop.conf /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
