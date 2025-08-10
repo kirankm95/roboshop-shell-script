@@ -49,4 +49,4 @@ cp /home/centos/roboshop-shell-script/roboshop.conf /etc/nginx/default.d/robosho
 validate $? "copying code of ngx"
 
 systemctl restart nginx &>> $LOGFILE
-validate $? "restarting service for ngx"
+validate $? "restarting service for ngnixx"
