@@ -28,25 +28,25 @@ if [ $ID -ne 0 ]
 fi
 
 dnf install nginx -y &>> $LOGFILE
-validate $? "installing ngx"
+validate $? "installing nginx"
 
 systemctl enable nginx &>> $LOGFILE
-validate $? "enabling ngx"
+validate $? "enabling nginx"
 
 systemctl start nginx &>> $LOGFILE
-validate $? "starting ngx"
+validate $? "starting nginx"
 
 rm -rf /usr/share/nginx/html/* &>> $LOGFILE
-validate $? "removing default content of ngx"
+validate $? "removing default content of nginx"
 
-curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip &>> $LOGFILE
-validate $? "downloading code of ngx"
+curl -L -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip &>> $LOGFILE
+validate $? "downloading code of nginx"
 
 cd /usr/share/nginx/html; unzip -o /tmp/web.zip &>> $LOGFILE
-validate $? "unzipping code of ngx"
+validate $? "unzipping code of nginx"
 
 cp /home/centos/roboshop-shell-script/roboshop.conf /etc/nginx/default.d/roboshop.conf &>> $LOGFILE
-validate $? "copying code of ngx"
+validate $? "copying code of nginx"
 
 systemctl restart nginx &>> $LOGFILE
-validate $? "restarting service for ngnixx"
+validate $? "restarting service for nginx"

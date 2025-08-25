@@ -48,20 +48,20 @@ fi
 mkdir -p /app &>> $LOGFILE
 validate $? "creating app directory"
 
-curl -L -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
+curl -L -o /tmp/user.zip https://roboshop-builds.s3.amazonaws.com/user.zip &>> $LOGFILE
 validate $? "downloading code"
 
-cd /app/; unzip -o /tmp/catalogue.zip &>> $LOGFILE
+cd /app/; unzip -o /tmp/user.zip &>> $LOGFILE
 validate $? "unzipping code"
 
 cd /app; npm install &>> $LOGFILE
 validate $? "installing dependencies"
 
-cp /home/centos/roboshop-shell-script/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
-validate $? "copying catalogue service file"
+cp /home/centos/roboshop-shell-script/user.service /etc/systemd/system/user.service &>> $LOGFILE
+validate $? "copying user service file"
 
-systemctl daemon-reload; systemctl enable catalogue; systemctl start catalogue &>> $LOGFILE
-validate $? "starting catalogue service"
+systemctl daemon-reload; systemctl enable user; systemctl start user &>> $LOGFILE
+validate $? "starting user service"
 
 cp /home/centos/roboshop-shell-script/mongodb.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
 validate $? "settingup mongdb repo"
@@ -69,5 +69,8 @@ validate $? "settingup mongdb repo"
 dnf install mongodb-org-shell -y &>> $LOGFILE
 validate $? "installing mongodb client"
 
-mongo --host mongodb.kiranku.online </app/schema/catalogue.js &>> $LOGFILE
+mongo --host mongodb.kiranku.online </app/schema/user.js &>> $LOGFILE
 validate $? "loading data to mongodb"
+
+
+

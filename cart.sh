@@ -48,26 +48,17 @@ fi
 mkdir -p /app &>> $LOGFILE
 validate $? "creating app directory"
 
-curl -L -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
+curl -L -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/cart.zip &>> $LOGFILE
 validate $? "downloading code"
 
-cd /app/; unzip -o /tmp/catalogue.zip &>> $LOGFILE
+cd /app/; unzip -o /tmp/cart.zip &>> $LOGFILE
 validate $? "unzipping code"
 
 cd /app; npm install &>> $LOGFILE
 validate $? "installing dependencies"
 
-cp /home/centos/roboshop-shell-script/catalogue.service /etc/systemd/system/catalogue.service &>> $LOGFILE
-validate $? "copying catalogue service file"
+cp /home/centos/roboshop-shell-script/cart.service /etc/systemd/system/cart.service &>> $LOGFILE
+validate $? "copying cart service file"
 
-systemctl daemon-reload; systemctl enable catalogue; systemctl start catalogue &>> $LOGFILE
-validate $? "starting catalogue service"
-
-cp /home/centos/roboshop-shell-script/mongodb.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
-validate $? "settingup mongdb repo"
-
-dnf install mongodb-org-shell -y &>> $LOGFILE
-validate $? "installing mongodb client"
-
-mongo --host mongodb.kiranku.online </app/schema/catalogue.js &>> $LOGFILE
-validate $? "loading data to mongodb"
+systemctl daemon-reload; systemctl enable cart; systemctl start cart &>> $LOGFILE
+validate $? "starting cart service"
